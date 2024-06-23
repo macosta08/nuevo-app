@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'primaryFont';
+  src: url('/fonts/GothRndBold.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'secondaryFont';
+  src: url('/fonts/GothRndBook.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'thirdFont';
+  src: url('/fonts/GothRndLight.otf');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'fourthFont';
+  src: url('/fonts/GothRndMed.otf');
+  font-display: swap;
+}
+
+.flip {
+  perspective: 12000px;
+}
+.flip-content {
+  width: 100%;
+  max-height: 100%;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+.flip .flip-content {
+  transform: rotateY(180deg);
+  transition: transform 0.2s;
+}
+.flip .flip-content2 {
+  transform: rotateY(0deg);
+  transition: transform 0.2s;
+}
+.flip-front,
+.flip-back {
+  position: relative;
+  max-height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+@layer utilities {
+  .tooltip {
+    @apply invisible absolute;
+  }
+  
+  .has-tooltip:hover .tooltip {
+    @apply visible z-50 w-full   -left-1 ;
+  }
+  
+  .app {
+    @apply text-[#373741];
+  }
+
+  .app-dark {
+    @apply text-white;
+  }
+
+  .background-app-dark {
+    background: rgb(0, 30, 60);
+    background: linear-gradient(
+      36deg,
+      rgba(0, 30, 60, 1) 24%,
+      rgb(0, 30, 92) 58%,
+      rgba(0, 30, 60, 1) 85%
+    );
+  }
+
+  .background-app-light {
+    //usa tailwind - css - sass
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      67deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(250, 254, 255, 1) 43%,
+      rgba(182, 239, 255, 1) 72%,
+      rgba(250, 254, 255, 1) 89%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+
+  .background-sidebar-dark {
+    background: rgb(0, 30, 60);
+  }
+
+  .background-sidebar-light {
+    background: white;
+  }
+  .button-blue {
+    @apply flex items-center justify-center w-full px-5 py-2 mt-4 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-800 rounded-full hover:bg-gray-700 focus:outline-none;
+  }
+  .button-yellow {
+    @apply flex items-center justify-center w-full px-5 py-2 mt-4 font-medium tracking-wide capitalize transition-colors duration-200 transform bg-yellow500 text-black rounded-full hover:bg-blue-200 focus:outline-none;
+  }
+
+  .button-gray {
+    @apply flex items-center justify-center w-full px-5 py-2 mt-4 font-medium tracking-wide capitalize transition-colors duration-200 transform bg-greyCustom text-black rounded-full hover:bg-red-300 focus:outline-none;
+  }
+  .button-green {
+    @apply flex items-center justify-center  px-5 py-2 font-medium tracking-wide capitalize transition-colors duration-200 transform bg-green text-black rounded-full hover:bg-blue-200 focus:outline-none;
+  }
+  .button-yellow-and-blue {
+    @apply flex items-center justify-center w-full px-5 py-2 mt-4 font-medium tracking-wide capitalize transition-colors duration-200 transform bg-yellow500 text-black rounded-full hover:bg-darkBlue500 hover:text-white focus:outline-none focus:bg-gray-700;
+  }
+  .threeDots {
+    @apply truncate hover:overflow-clip  hover:break-all hover:whitespace-normal max-w-xs sm:max-w-none;
+  }
+}
+
+//SWIPER CAROUSEL
+
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'primaryFont';
+    line-height: 1.22;
+    letter-spacing: 0.2px;
+  }
+  h1 {
+    font-size: 2.81rem;
+  }
+
+  h2 {
+    font-size: 2.18rem;
+  }
+
+  h3 {
+    font-size: 1.87rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+  :root[theme='dark'] p,
+  :root[theme='dark'] a,
+  :root[theme='dark'] span {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: 'primaryFont';
+    color: rgb(178, 186, 194);
+  }
+  :root[theme='light'] p,
+  :root[theme='light'] a,
+  :root[theme='light'] span {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: 'primaryFont';
+    color: rgb(135, 135, 145);
+  }
+  body {
+    transition: color 3s ease, background-color 3s ease;
+    /* set the light colors here if needed */
+  }
+}
