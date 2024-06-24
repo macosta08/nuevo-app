@@ -10,8 +10,7 @@
   },
   "scripts": {
     "dev": "next",
-    "generate_build": "cosmo && npx prisma generate && prettier --config .prettierrc prisma/generated/graphql/**/*.ts --write && next build",
-    "build": "next build --debug",
+  "generate_build": "echo 'Running cosmo...' && cosmo && echo 'Running Prisma generate...' && npx prisma generate && echo 'Running prettier...' && prettier --config .prettierrc prisma/generated/graphql/**/*.ts --write && echo 'Running next build...' && next build",
     "start": "next start",
     "lint": "eslint components/** utils/** pages/** hooks/**",
     "lint:fix": "eslint --fix components/** utils/** pages/** hooks/**",
