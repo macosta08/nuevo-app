@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import { ApolloClient, InMemoryCache, from, HttpLink } from '@apollo/client';
 
 declare global {
@@ -11,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
     cache: new InMemoryCache(),
     link: from([
       new HttpLink({
-        uri: 'https://resultados.institutogastroclinico.com/api/graphql',
+        uri: 'https://mi-gestion-ingresos.vercel.app/api/graphql',
       }),
     ]),
 
@@ -23,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
       cache: new InMemoryCache(),
       link: from([
         new HttpLink({
-          uri: 'http://localhost:3000/api/graphql',
+          uri: 'https://mi-gestion-ingresos.vercel.app/api/graphql',
         }),
       ]),
 
