@@ -48,7 +48,7 @@ const UserTypes = gql`
     image: StringInput
     name: StringInput
     cedula: StringInput
-    roleId: StringInput
+    role: RoleUpdateManyWithoutUsersInput
   }
 
   type Mutation {

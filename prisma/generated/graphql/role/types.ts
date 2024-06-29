@@ -34,6 +34,10 @@ const RoleTypes = gql`
     connect: RoleWhereUniqueInput
   }
 
+  input RoleUpdateManyWithoutUsersInput {
+    connect: RoleWhereUniqueInput
+  }
+
   input RoleUpdateInput {
     name: Enum_RoleNameInput
     icon: StringInput

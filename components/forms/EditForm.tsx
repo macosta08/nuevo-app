@@ -70,10 +70,6 @@ export default function EditForm({ rolesOption }: ComponentProps) {
     },
     fetchPolicy: 'cache-and-network',
   });
-  // const [currentRole, setCurrentRole] = useState<Role>({
-  //   label: user?.role?.name,
-  //   value: user?.role?.id,
-  // });
   useEffect(() => {
     if (queryData) {
       const fetchedUser = {
@@ -106,17 +102,14 @@ export default function EditForm({ rolesOption }: ComponentProps) {
         ? `${documentType?.value}-${formData.cedula || user?.cedula}`
         : 'N/A';
 
-    const { where, data } = updateUserTransformation(
-      {
-        id: user?.id,
-        name: formData.name || user?.name,
-        email: formData.email || user?.email,
-        cedula: formData.cedula || user?.cedula,
-        roles: role,
-        typeDocument,
-      },
-      queryData.user.role.id
-    );
+    const { where, data } = updateUserTransformation({
+      id: user?.id,
+      name: formData.name || user?.name,
+      email: formData.email || user?.email,
+      cedula: formData.cedula || user?.cedula,
+      roles: role,
+      typeDocument,
+    });
     try {
       setLoadingSave(true);
       await updateUserMutation({

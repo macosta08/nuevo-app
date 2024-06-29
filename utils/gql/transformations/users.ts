@@ -10,19 +10,8 @@ type User = {
   cedula: string;
   typeDocument: string;
 };
-type Role = {
-  value: string;
-  label: string;
-};
-
-// type Document = {
-//   value: string;
-//   label: string;
-// };
 
 export const createUserTransformation = (user: User) => {
-  // const rolesArray = roles.map((role) => ({ id: role.value }));
-
   const data = {
     data: {
       name: user.name,
@@ -49,38 +38,17 @@ export const createUserTransformation = (user: User) => {
   return data;
 };
 
-export const updateUserTransformation = (
-  user: User,
-  roleToDisconnect: Role
-) => {
+export const updateUserTransformation = (user: User) => {
   const where = { id: user.id };
-  const roleTDc =
-    roleToDisconnect === user?.roles?.value ? '' : roleToDisconnect;
-
   const data = {
     name: { set: user.name },
     cedula: { set: user.typeDocument },
     email: { set: user.email },
     role: {
-      disconnect: {
-        id: roleTDc,
-      },
       connect: {
         id: user?.roles?.value,
       },
     },
-    // roles: {
-    //   disconnect: [
-    //     {
-    //       id: roleTDc,
-    //     },
-    //   ],
-    //   connect: [
-    //     {
-    //       id: user?.roles?.value,
-    //     },
-    //   ],
-    // },
   };
 
   return { where, data };
