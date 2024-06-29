@@ -27,17 +27,14 @@ export const createUserTransformation = (user: User) => {
     data: {
       name: user.name,
       email: user.email,
-
       cedula: user.typeDocument,
       image: user.image,
       deleted: false,
       enabled: true,
-      roles: {
-        connect: [
-          {
-            id: user.roles.value,
-          },
-        ],
+      role: {
+        connect: {
+          id: user.roles.value,
+        },
       },
       accounts: {
         create: {
@@ -64,18 +61,26 @@ export const updateUserTransformation = (
     name: { set: user.name },
     cedula: { set: user.typeDocument },
     email: { set: user.email },
-    roles: {
-      disconnect: [
-        {
-          id: roleTDc,
-        },
-      ],
-      connect: [
-        {
-          id: user?.roles?.value,
-        },
-      ],
+    role: {
+      disconnect: {
+        id: roleTDc,
+      },
+      connect: {
+        id: user?.roles?.value,
+      },
     },
+    // roles: {
+    //   disconnect: [
+    //     {
+    //       id: roleTDc,
+    //     },
+    //   ],
+    //   connect: [
+    //     {
+    //       id: user?.roles?.value,
+    //     },
+    //   ],
+    // },
   };
 
   return { where, data };

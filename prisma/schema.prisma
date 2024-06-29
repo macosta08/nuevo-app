@@ -88,12 +88,13 @@ model User {
   image         String?
   name          String?
   cedula        String?
-  roles         Role[]
   accounts      Account[]
   sessions      Session[]
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   movimientos   Movimiento[]
+  role          Role?        @relation(fields: [roleId], references: [id])
+  roleId        String?
 }
 
 model Movimiento {

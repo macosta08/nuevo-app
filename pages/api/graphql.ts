@@ -32,8 +32,8 @@ export default cors(async (req, res) => {
 
   const apolloServer = new ApolloServer({
     context: () => ({ session }),
-    typeDefs: [...types, ...customTypes, GQLEnums],
-    resolvers: [...resolvers, ...customResolvers],
+    typeDefs: [...types, GQLEnums],
+    resolvers: [...resolvers],
     introspection: true,
   });
 

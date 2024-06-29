@@ -34,7 +34,7 @@ function Index() {
   });
 
   const roles = dataRoles?.roles;
-  const currentRol = session?.user?.roles[0];
+  const currentRol = session?.user?.role;
 
   const rolVerify = (arrayRole, roleUser) => {
     if (roleUser?.name === 'Admin') {

@@ -74,7 +74,7 @@ export default function EditForm({ rolesOption }: ComponentProps) {
   //   label: user?.role?.name,
   //   value: user?.role?.id,
   // });
-
+console.log('queryData :>> ', queryData);
   useEffect(() => {
     if (queryData) {
       const fetchedUser = {
@@ -82,7 +82,7 @@ export default function EditForm({ rolesOption }: ComponentProps) {
         cedula: obtenerNumeroIdentificación(queryData.user.cedula),
         name: queryData.user.name,
         email: queryData.user.email,
-        role: queryData.user.roles[0],
+        role: queryData.user.role,
       };
       setUser(fetchedUser);
       setRole({
@@ -116,7 +116,7 @@ export default function EditForm({ rolesOption }: ComponentProps) {
         roles: role,
         typeDocument,
       },
-      queryData.user.roles[0].id
+      queryData.user.role.id
     );
     try {
       setLoadingSave(true);

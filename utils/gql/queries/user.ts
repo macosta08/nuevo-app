@@ -5,9 +5,9 @@ const GET_USER = gql`
     user(id: $userId) {
       id
       name
-      email
       cedula
-      roles {
+      email
+      role {
         id
         name
       }

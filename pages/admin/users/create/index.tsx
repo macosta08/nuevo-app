@@ -42,7 +42,7 @@ function Index() {
     return arrayRole;
   };
   const roles = dataRoles?.roles;
-  const currentRol = session?.user?.roles[0];
+  const currentRol = session?.user?.role;
   const rolOption = dataRoles && rolVerify(roles, currentRol);
   // const rolOption = rolVerify(roles, currentRol);
   if (loadingRol) {

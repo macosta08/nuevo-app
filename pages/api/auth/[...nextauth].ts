@@ -16,7 +16,7 @@ export const options = {
         include: {
           user: {
             include: {
-              roles: true,
+              role: true,
             },
           },
         },
