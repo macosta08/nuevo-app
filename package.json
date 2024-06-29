@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "next",
-    "generate_build": "npx prisma generate && prettier --config .prettierrc && next build",
+    "generate_build": "npx prisma generate && next build",
     "vercel-build": "bun generate_build",    
     "start": "next start",
     "lint": "eslint components/** utils/** pages/** hooks/**",
@@ -18,8 +18,7 @@
     "prepare": "husky install",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "createPage": "node ./createPage.ts",
-    "cosmo": "cosmo && prettier --config .prettierrc prisma/generated/graphql/**/*.ts --write",
-    "generate": "npx prisma generate && bun cosmo"
+    "generate": "npx prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.7.5",
