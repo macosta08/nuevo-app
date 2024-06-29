@@ -80,10 +80,10 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  deleted       Boolean   @default(false)
-  enabled       Boolean   @default(true)
-  email         String?   @unique
+  id            String       @id @default(cuid())
+  deleted       Boolean      @default(false)
+  enabled       Boolean      @default(true)
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   name          String?
@@ -91,8 +91,26 @@ model User {
   roles         Role[]
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  movimientos   Movimiento[]
+}
+
+model Movimiento {
+  id          String        @id @default(cuid())
+  monto       String
+  fecha       DateTime
+  descripcion String?
+  concepto    Enum_Concepto
+  user        User?         @relation(fields: [userId], references: [id])
+  userId      String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum Enum_Concepto {
+  Ingreso
+  Egreso
 }
 
 model VerificationRequest {
