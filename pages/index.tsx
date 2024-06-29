@@ -10,7 +10,7 @@ export async function getServerSideProps(ctx) {
 }
 
 function Index() {
-  return <div>hola</div>;
+  return <div>holaaaaaaaaaaaaaaaaaaaaaaaa</div>;
 }
 
 export default Index;
