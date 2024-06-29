@@ -74,7 +74,6 @@ export default function EditForm({ rolesOption }: ComponentProps) {
   //   label: user?.role?.name,
   //   value: user?.role?.id,
   // });
-console.log('queryData :>> ', queryData);
   useEffect(() => {
     if (queryData) {
       const fetchedUser = {

@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react';
 
 function LayoutPublic({ children }) {
   const { data: session }: any = useSession();
-  console.log('session?.user?.role?.name :>> ', session?.user?.role?.name);
   return (
     <ToastContextProvider>
       <div className='min-w-screen flex min-h-screen flex-col justify-between overflow-hidden'>

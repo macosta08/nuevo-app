@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "next",
-    "generate_build": "cosmo && npx prisma generate && prettier --config .prettierrc prisma/generated/graphql/**/*.ts --write && next build",
+    "generate_build": "npx prisma generate && prettier --config .prettierrc && next build",
     "vercel-build": "bun generate_build",    
     "start": "next start",
     "lint": "eslint components/** utils/** pages/** hooks/**",

@@ -2,8 +2,6 @@ import 'reflect-metadata';
 import 'ts-tiny-invariant';
 import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'micro-cors';
-import { customTypes } from 'graphql/customResolvers/types';
-import { customResolvers } from 'graphql/customResolvers/resolvers';
 import { getSession } from 'next-auth/react';
 import { types } from 'prisma/generated/graphql/types';
 import { resolvers } from 'prisma/generated/graphql/resolvers';
