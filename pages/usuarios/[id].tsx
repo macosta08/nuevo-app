@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextSecundary from '@components/AtomicDesign/Atoms/TextSecundary';
 import { Button } from '@components/ui/button';
 import TextInput from '@components/AtomicDesign/Atoms/TextInput';
@@ -29,9 +29,8 @@ function UsuarioId() {
     telefono: usuario?.user?.cedula || '',
     rol: usuario?.user?.role?.id || '',
   };
-  const { formik, handleMutation } = useFormikUsuario({ data });
-  console.log('usuario?.user?.role?.id :>> ', usuario?.user?.role?.id);
-  console.log('formik :>> ', formik);
+  const { formik, handleMutation } = useFormikUsuario({ ...data });
+
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
       <section className='mx-auto w-full max-w-4xl rounded-md bg-purple-200 p-6 shadow-md dark:bg-gray-800'>

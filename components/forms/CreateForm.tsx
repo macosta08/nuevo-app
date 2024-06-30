@@ -7,7 +7,6 @@ import { useMutation } from '@apollo/client';
 import Link from 'next/link';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { useToastContext } from 'context/toast';
 import { CREATE_USER } from 'utils/gql/mutations/users';
 import { createUserTransformation } from 'utils/gql/transformations/users';
 import { createUser, postEmail } from 'utils/api';

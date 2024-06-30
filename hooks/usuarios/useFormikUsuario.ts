@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import { FormikProps, UsuariosProps } from 'types';
 import { useMutation } from '@apollo/client';
 import { CREATE_USUARIO, UPDATE_USUARIO } from 'graphql/mutations/usuarios';
@@ -11,7 +11,7 @@ import { GET_ALL_USERS } from 'graphql/queries/usuarios';
 import { useToast } from '@components/ui/use-toast';
 import { createUser } from 'utils/api';
 
-const useFormikUsuario = ({ data }: UsuariosProps) => {
+const useFormikUsuario = ({ ...data }: UsuariosProps) => {
   const router = useRouter();
   const { toast } = useToast();
   // const initialValues = useMemo(
@@ -41,7 +41,6 @@ const useFormikUsuario = ({ data }: UsuariosProps) => {
   });
 
   const { values } = formik;
-  console.log(values);
   const isCompleted = {
     onCompleted: () => {
       toast({
@@ -58,7 +57,6 @@ const useFormikUsuario = ({ data }: UsuariosProps) => {
   };
   const [createUsuario] = useMutation(CREATE_USUARIO, isCompleted);
   const [updateUsuario] = useMutation(UPDATE_USUARIO, isCompleted);
-  console.log('router?.query?.id :>> ', router?.query?.id);
   const handleMutation = async () => {
     if (router?.query?.id !== 'nuevo') {
       await updateUsuario({
@@ -69,7 +67,7 @@ const useFormikUsuario = ({ data }: UsuariosProps) => {
           data: {
             name: values?.name,
             lastName: values?.lastName,
-            telefono: values?.telefono,
+            cedula: values?.telefono,
             rol: values?.rol,
           },
         },

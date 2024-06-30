@@ -2,15 +2,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMemo } from 'react';
 import { FormikProps, IngresosEgresosProps } from 'types';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
-const useFormikIngresoEgreso = ({ data }: {data: IngresosEgresosProps}) => {
-const router = useRouter();
+const useFormikIngresoEgreso = ({ data }: { data: IngresosEgresosProps }) => {
+  // const router = useRouter();
   const initialValues = useMemo(
     () => ({
-    monto: data?.monto || '',
-    concepto: data?.concepto || '',
-    fecha: data?.fecha || '',
+      monto: data?.monto || '',
+      concepto: data?.concepto || '',
+      fecha: data?.fecha || '',
     }),
     [data]
   );
@@ -24,33 +24,31 @@ const router = useRouter();
   const formik: FormikProps = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: () => {
-    },
+    onSubmit: () => {},
     enableReinitialize: true,
   });
 
-  const { values } = formik;
-  console.log(values)
-//   const [createUsuarioMutation] = useMutation(CREATE_USUARIO, {
-//     onCompleted: () => {
-//       toast.success('Referencia creado exitosamente');
-//     },
-//     onError: () => {
-//       toast.error(
-//         'No se ha podido crear el referencia, comuníquese con soporte.'
-//       );
-//     },
-//   });
-//   const [updateUsuarioMutation] = useMutation(UPDATE_USUARIO, {
-//     onCompleted: () => {
-//       toast.success('Referencia creado exitosamente');
-//     },
-//     onError: () => {
-//       toast.error(
-//         'No se ha podido crear el referencia, comuníquese con soporte.'
-//       );
-//     },
-//   });
+  // const { values } = formik;
+  //   const [createUsuarioMutation] = useMutation(CREATE_USUARIO, {
+  //     onCompleted: () => {
+  //       toast.success('Referencia creado exitosamente');
+  //     },
+  //     onError: () => {
+  //       toast.error(
+  //         'No se ha podido crear el referencia, comuníquese con soporte.'
+  //       );
+  //     },
+  //   });
+  //   const [updateUsuarioMutation] = useMutation(UPDATE_USUARIO, {
+  //     onCompleted: () => {
+  //       toast.success('Referencia creado exitosamente');
+  //     },
+  //     onError: () => {
+  //       toast.error(
+  //         'No se ha podido crear el referencia, comuníquese con soporte.'
+  //       );
+  //     },
+  //   });
 
   const handleMutation = async () => {
     // if(router?.query?.id){
@@ -88,7 +86,6 @@ const router = useRouter();
     //         refetchQueries: [GET_ALL_USERS],
     //       });
     // }
-   
   };
 
   return {

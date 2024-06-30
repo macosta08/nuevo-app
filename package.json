@@ -48,7 +48,10 @@
     "axios": "^0.27.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "devextreme": "^23.2.5",
+    "devextreme-react": "^23.2.5",
     "eslint-plugin-typescript": "^0.14.0",
+    "formik": "^2.4.6",
     "fs": "^0.0.1-security",
     "graphql": "^16.5.0",
     "graphql-fields": "^2.0.3",
@@ -61,8 +64,8 @@
     "nanoid": "^3.3.4",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
-    "next-themes": "^0.3.0",
     "next-superjson": "^0.0.3",
+    "next-themes": "^0.3.0",
     "nodemailer": "^6.7.7",
     "nprogress": "^0.2.0",
     "prepend": "^1.0.2",
@@ -86,10 +89,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "ts-tiny-invariant": "^2.0.4",
-    "formik": "^2.4.6",
-    "yup": "^1.4.0",
-    "devextreme": "^23.2.5",
-    "devextreme-react": "^23.2.5"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@prevalentware/prisma-cosmo": "^0.1.10",
