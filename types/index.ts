@@ -3,13 +3,13 @@ import { FormikErrors, FormikValues } from 'formik';
 export type LinkItem = {
   name: string;
   link: string;
-  icon: string;
+  icon: React.ReactNode;
 };
 
 export type LinkItemCard = {
   name: string;
   link: string;
-  icon: string;
+  icon: React.ReactNode;
   description: string;
 };
 
