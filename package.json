@@ -1,5 +1,5 @@
 {
-  "name": "prueba-tecnica-fullstack-Prevalentware",
+  "name": "Prueba-tecnica-fullstack-Prevalentware",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -13,7 +13,9 @@
     "start": "next start",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "createPage": "node ./createPage.ts",
-    "generate": "npx prisma generate"
+    "generate": "npx prisma generate",
+    "lint": "eslint components/** utils/** pages/** hooks/**",
+    "lint:fix": "eslint --fix components/** utils/** pages/** hooks/**"
   },
   "dependencies": {
     "@apollo/client": "^3.7.5",
