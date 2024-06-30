@@ -16,6 +16,7 @@ import SelectInput from '@components/inputs/inputSelect/';
 import Button from '@components/buttons/Buttons';
 import router from 'next/router';
 import { documentTypeOption } from 'utils/codeFunctions';
+import { useToast } from '@components/ui/use-toast';
 
 type ComponentProps = {
   rolesOption: { id: string; name: string }[];
@@ -24,7 +25,7 @@ type ComponentProps = {
 export default function CreateForm({ rolesOption }: ComponentProps) {
   const { form, formData, updateFormData } = useFormData(null);
 
-  const { setToastState } = useToastContext();
+  const { toast } = useToast();
   const [createUserMutation] = useMutation(CREATE_USER, {
     refetchQueries: [GET_USERS],
   });
@@ -62,9 +63,8 @@ export default function CreateForm({ rolesOption }: ComponentProps) {
           variables: { data },
         })
           .then(async () => {
-            setToastState({
-              message: 'Usuario creado exitosamente',
-              type: 'success',
+            toast({
+              description: 'Usuario creado exitosamente',
             });
             await sendMailCreateUser(password);
             router.push({
@@ -72,21 +72,21 @@ export default function CreateForm({ rolesOption }: ComponentProps) {
             });
           })
           .catch(() =>
-            setToastState({
-              message: 'Ocurrió error creando un usuario',
-              type: 'error',
+            toast({
+              variant: 'destructive',
+              description: 'Ocurrió error creando un usuarioo',
             })
           );
       } else {
-        setToastState({
-          message: 'Ocurrió error creando un usuario',
-          type: 'error',
+        toast({
+          variant: 'destructive',
+          description: 'eeeeeOcurrió error creando un usuarioo',
         });
       }
     } catch (err) {
-      setToastState({
-        message: 'Ocurrió error creando un usuario',
-        type: 'error',
+      toast({
+        variant: 'destructive',
+        description: 'aaaaaaaOcurrió error creando un usuarioo',
       });
     }
   };
@@ -98,16 +98,15 @@ export default function CreateForm({ rolesOption }: ComponentProps) {
       password,
     }).then((response) => {
       if (response.status === 'message sent') {
-        setToastState({
-          message: 'Correo enviado exitosamente',
-          type: 'success',
+        toast({
+          description: 'Correo enviado exitosamente',
         });
         setLoadingEmail(false);
         return;
       }
-      setToastState({
-        message: 'Ocurrió un error enviando el correo',
-        type: 'error',
+      toast({
+        variant: 'destructive',
+        description: 'Ocurrió un error enviando el correo',
       });
       setLoadingEmail(false);
     });

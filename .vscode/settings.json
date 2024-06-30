@@ -2,6 +2,10 @@
     "cSpell.ignoreWords": [
         "Nuestros"
     ],
-    "scss.lint.unknownAtRules": "ignore"
+    "scss.lint.unknownAtRules": "ignore",
+    "cSpell.words": [
+        "clsx",
+        "tailwindcss"
+    ]
 
 }

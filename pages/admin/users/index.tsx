@@ -20,6 +20,7 @@ import DeleteUserModal from '@components/modals/DeleteUserModal';
 import Loading from '@components/Loading';
 import ButtonBack from '@components/buttons/ButtonBack';
 import { verificarRol } from 'utils/codeFunctions';
+import { useToast } from '@components/ui/use-toast';
 
 type User = {
   id: string;
@@ -55,7 +56,7 @@ function Index() {
     refetchQueries: [GET_USERS],
   });
   const enabled = selectedUser?.enabled;
-  const { setToastState } = useToastContext();
+  const { toast } = useToast();
   // const [loadingSave, setLoadingSave] = useState<boolean>(false);
   const [filteredItems, setFilteredItems] = useState<any>([]);
   const [loadingItem, setLoadingItem] = useState(false);
@@ -168,15 +169,14 @@ function Index() {
       });
 
       if (!error) {
-        setToastState({
-          message: 'Usuario eliminado',
-          type: 'success',
+        toast({
+          description: 'Usuario eliminado',
         });
       }
     } catch (err) {
-      setToastState({
-        message: 'Ocurrió un error eliminando el usuario',
-        type: 'error',
+      toast({
+        variant: 'destructive',
+        description: 'Ocurrió un error eliminando el usuario',
       });
       setOpenDeleteUserModal(false);
     }

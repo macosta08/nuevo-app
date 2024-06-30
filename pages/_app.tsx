@@ -10,6 +10,7 @@ import 'styles/globals.scss';
 import { NextComponentType, NextPageContext } from 'next';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from '@components/PrivateRoute';
+import { TooltipProvider } from '@components/ui/tooltip';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -52,14 +53,16 @@ function App({
   if (!client) return <Loading open />;
   return (
     <ApolloProvider client={client}>
-      <PrivateRoute
-        rejected={pageProps?.rejected ?? false}
-        isPublic={pageProps?.isPublic ?? false}
-      >
-        <Component {...pageProps} />
-      </PrivateRoute>
+      <TooltipProvider>
+        <PrivateRoute
+          rejected={pageProps?.rejected ?? false}
+          isPublic={pageProps?.isPublic ?? false}
+        >
+          <Component {...pageProps} />
+        </PrivateRoute>
 
-      <ToastContainer />
+        <ToastContainer />
+      </TooltipProvider>
     </ApolloProvider>
   );
 }
