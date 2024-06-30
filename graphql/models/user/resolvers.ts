@@ -5,7 +5,7 @@ const UserResolvers = {
     account: async (parent: any, _: any) => {
       return await prisma.account.findUnique({
         where: {
-          userId: parent.id,
+          id: parent.id,
         },
       });
     },
