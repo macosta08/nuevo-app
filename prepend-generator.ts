@@ -17,19 +17,19 @@ const main = () => {
   prepend(
     './prisma/schema.prisma',
 
-    error => {
+    (error) => {
       // eslint-disable-next-line no-console
       if (error) console.error(error.message);
       prepend(
         './prisma/schema.prisma',
         'generator client {\n  provider = "prisma-client-js"\n }\n',
-        error2 => {
+        (error2) => {
           // eslint-disable-next-line no-console
           if (error2) console.error(error.message);
           prepend(
             './prisma/schema.prisma',
             'datasource db {\n  provider = "postgresql"\n  url      = env("DATABASE_URL")\n }\n',
-            error3 => {
+            (error3) => {
               // eslint-disable-next-line no-console
               if (error3) console.error(error.message);
             }

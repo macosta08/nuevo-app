@@ -46,7 +46,7 @@ function UsuarioId() {
             placeholder='Ingrese el nombre'
             name='name'
             value={data?.name}
-            onChange={formik.handleChange}
+            onChange={formik.handleChange }
           />
           <TextInput
             name='lastName'

@@ -13,5 +13,5 @@ export const resolvers = [
   MovimientoResolvers,
   PageResolvers,
   RoleResolvers,
-  AccountResolvers
+  AccountResolvers,
 ];

@@ -49,7 +49,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -65,7 +64,6 @@
     stroke-width: 1px;
   }
 }
-
 
 @font-face {
   font-family: 'primaryFont';
@@ -123,11 +121,11 @@
   .tooltip {
     @apply invisible absolute;
   }
-  
+
   .has-tooltip:hover .tooltip {
-    @apply visible z-50 w-full   -left-1 ;
+    @apply visible z-50 w-full   -left-1;
   }
-  
+
   .app {
     @apply text-[#373741];
   }
@@ -189,7 +187,6 @@
 
 //SWIPER CAROUSEL
 
-
 @layer base {
   h1,
   h2,
@@ -216,9 +213,9 @@
   }
 
   body {
-    transition: color 3s ease, background-color 3s ease;
+    transition:
+      color 3s ease,
+      background-color 3s ease;
     /* set the light colors here if needed */
   }
 }
-
-

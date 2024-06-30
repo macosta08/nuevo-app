@@ -8,7 +8,6 @@ import UsersTable from '@components/tables/UsersTable';
 import GET_USERS from 'utils/gql/queries/users';
 import { UPDATE_USER } from 'utils/gql/mutations/users';
 import { useMutation, useQuery } from '@apollo/client';
-import { useToastContext } from 'context/toast';
 import Pagination from '@components/Pagination';
 import InputSearch from '@components/inputs/inputSearch';
 import ButtonIcon from '@components/buttons/ButtonIcon';

@@ -14,12 +14,11 @@ const UserTypes = gql`
     role: Role!
     roleId: String!
     movimientos: [Movimiento]
-    account:  Account
+    account: Account
     sessions: [Session]
     createdAt: DateTime!
     updatedAt: DateTime!
   }
-
 
   input UserCreateInput {
     email: String
@@ -58,7 +57,6 @@ const UserTypes = gql`
     deleted: BooleanInput
     enabled: BooleanInput
     roleId: StringInput
-
   }
 
   type Query {

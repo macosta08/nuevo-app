@@ -41,5 +41,5 @@ export const types = [
   VerificationRequestTypes,
   MovimientoTypes,
   PageTypes,
-  RoleTypes
+  RoleTypes,
 ];

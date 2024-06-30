@@ -62,7 +62,7 @@ const UserResolvers = {
     createUser: async (_: any, args: any) =>
       await prisma.user.create({
         data: {
-          ...args.data
+          ...args.data,
         },
       }),
     updateUser: async (_: any, args: any) =>

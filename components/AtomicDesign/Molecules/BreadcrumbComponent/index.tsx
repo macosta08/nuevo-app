@@ -1,22 +1,30 @@
 import React from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@components/ui/breadcrumb';
- import { Home } from "lucide-react";
-import { capitalizeSentence, completedArrayRouters, contarSlash, isAlphanumericWithFixedLength } from './utils';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from '@components/ui/breadcrumb';
+import { Home } from 'lucide-react';
+import {
+  capitalizeSentence,
+  completedArrayRouters,
+  contarSlash,
+  isAlphanumericWithFixedLength,
+} from './utils';
 
 /**
  * Componente de navegación de migas de pan.
  */
 const BreadcrumbComponent = () => {
-
-
-const router = useRouter();
+  const router = useRouter();
   const pathParts = completedArrayRouters(router);
   const countBack = contarSlash(router.asPath);
 
   const conditionComplete = (index: number) => pathParts.length !== index + 1;
-
 
   return (
     <div className='flex gap-2 w-full'>
@@ -25,7 +33,7 @@ const router = useRouter();
         onClick={() => (countBack === 1 ? router.push('/') : router.back())}
         className='flex h-6 w-6 items-center justify-center rounded-full bg-color_proyect_blue_emerald_dark'
       >
-      <Home className="h-5 w-5" />
+        <Home className='h-5 w-5' />
       </button>
       <Breadcrumb>
         <BreadcrumbList>
