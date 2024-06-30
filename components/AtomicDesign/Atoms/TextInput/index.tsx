@@ -11,9 +11,7 @@ const TextInput: React.FC<TextInputProps> = ({
   ...rest
 }) => (
   <div>
-    <label className='text-gray-700  dark:text-gray-200'>
-      {label}
-    </label>
+    <label className='text-gray-700  dark:text-gray-200'>{label}</label>
     <input
       type={type}
       placeholder={placeholder}
