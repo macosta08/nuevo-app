@@ -3,13 +3,13 @@ import { FormikErrors, FormikValues } from 'formik';
 export type LinkItem = {
   name: string;
   link: string;
-  icon: React.ReactNode;
+  icon: string;
 };
 
 export type LinkItemCard = {
   name: string;
   link: string;
-  icon: React.ReactNode;
+  icon: string;
   description: string;
 };
 
@@ -36,16 +36,16 @@ export interface FormikProps {
   handleChange: (e: React.ChangeEvent<unknown>) => void;
   errors: FormikErrors<FormikValues>;
   handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
-  setFieldValue: (
-    field: string,
-    value:
-      | {
-          label: string;
-          value: string | boolean | number;
-        }
-      | unknown,
-    shouldValidate?: boolean | undefined
-  ) => void;
+  // setFieldValue: (
+  //   field: string,
+  //   value:
+  //     | {
+  //         label: string;
+  //         value: string | boolean | number;
+  //       }
+  //     | unknown,
+  //   shouldValidate?: boolean | undefined
+  // ) => void;
 }
 
 export interface FormProps {
