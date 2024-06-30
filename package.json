@@ -11,9 +11,6 @@
     "generate_build": "npx prisma generate && next build",
     "vercel-build": "bun generate_build",
     "start": "next start",
-    "lint": "eslint components/** utils/** pages/** hooks/**",
-    "lint:fix": "eslint --fix components/** utils/** pages/** hooks/**",
-    "prepare": "husky install",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "createPage": "node ./createPage.ts",
     "generate": "npx prisma generate"
@@ -99,7 +96,6 @@
     "@types/react-dom": "^18.0.5",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.16.0",
-    "husky": "^8.0.1",
     "lint": "^0.7.0",
     "postcss": "^8.4.14",
     "prettier": "^2.8.4",
