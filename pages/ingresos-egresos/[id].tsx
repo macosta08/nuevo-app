@@ -4,6 +4,7 @@ import { Button } from '@components/ui/button';
 import TextInput from '@components/AtomicDesign/Atoms/TextInput';
 import { useFormikIngresoEgreso } from 'hooks/ingresosEgresos/useFormikIngresoEgreso';
 import { useRouter } from 'next/router';
+import NumberInput from '@components/AtomicDesign/Atoms/NumberInput';
 
 function IngresosEgresosId() {
   const router = useRouter();
@@ -45,14 +46,13 @@ function IngresosEgresosId() {
       />
       <section className='mx-auto w-full max-w-4xl rounded-md bg-purple-200 p-6 shadow-md dark:bg-gray-800'>
         <form onSubmit={formik.handleSubmit} className='mt-4 space-y-6'>
-          <TextInput
-            label='Monto'
-            type='text'
-            placeholder='Ingrese el monto'
-            name='monto'
-            value={data?.monto}
-            onChange={formik.handleChange}
-          />
+          <NumberInput 
+            label='Monto' 
+            name='monto' 
+            value={data?.monto} 
+            onChange={formik.handleChange} 
+            thousandSeparator
+          /> 
           <TextInput
             label='Concepto'
             type='text'

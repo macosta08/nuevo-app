@@ -38,7 +38,7 @@ function UsuarioId() {
     id: usuario?.user?.id || '',
     name: usuario?.user?.name || '',
     email: usuario?.user?.email || '',
-    telefono: usuario?.user?.cedula || '',
+    telefono: usuario?.user?.telefono || '',
     rol: usuario?.user?.role?.id || '',
   };
 
@@ -77,7 +77,7 @@ console.log('formik.errors.name :>> ', formik.errors);
           />
           <TextInput
             name='telefono'
-            label='Telefono'
+            label='Teléfono'
             type='tel'
             placeholder='Ingrese el telefono'
             value={formik?.values?.telefono}

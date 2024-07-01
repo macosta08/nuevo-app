@@ -9,7 +9,7 @@ const UserTypes = gql`
     emailVerified: DateTime
     image: String
     name: String
-    cedula: String
+    telefono: String
     accounts: [Account]
     sessions: [Session]
     createdAt: DateTime!
@@ -31,7 +31,7 @@ const UserTypes = gql`
     emailVerified: DateTime
     image: String
     name: String
-    cedula: String
+    telefono: String
     role: RoleCreateNestedManyWithoutUsersInput
     accounts: AccountCreateNestedManyWithoutUserInput
   }
@@ -47,7 +47,7 @@ const UserTypes = gql`
     emailVerified: DateTimeInput
     image: StringInput
     name: StringInput
-    cedula: StringInput
+    telefono: StringInput
     role: RoleUpdateManyWithoutUsersInput
   }
 

@@ -21,13 +21,28 @@ export interface IngresosEgresosProps {
   monto: string | undefined;
 }
 
-export interface UsuariosProps {
+export interface UsuarioProps {
   id: string | undefined;
   name: string | undefined;
   email: string | undefined;
   telefono: string | undefined;
   rol: string | undefined;
 }
+
+interface RoleProps {
+  id: string | undefined;
+  name: string | undefined;
+}
+export interface UsuariosProps {
+  id: string | undefined;
+  name: string | undefined;
+  email: string | undefined;
+  telefono: string | undefined;
+  role: RoleProps;
+}
+
+
+
 
 export interface FormikProps {
   values: FormikValues;

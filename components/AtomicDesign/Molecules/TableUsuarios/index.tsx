@@ -10,11 +10,12 @@ import {
 import { UsuariosProps } from 'types';
 import { Button } from '@components/ui/button';
 import { useRouter } from 'next/router';
+import { Badge } from '@components/ui/badge';
 
 function TableUsuarios({ data }: { data: UsuariosProps[] }) {
   const router = useRouter();
 
-  const headers = ['Nombre', 'Correo', 'Telefono', 'Acciones'];
+  const headers = ['Nombre', 'Correo', 'Teléfono', 'Rol', 'Acciones'];
 
   return (
     <div className='relative w-full overflow-hidden'>
@@ -24,7 +25,7 @@ function TableUsuarios({ data }: { data: UsuariosProps[] }) {
             {headers.map((header) => (
               <TableHead
                 key={header}
-                className='table-cell bg-purple-300 text-black'
+                className='bg-purple-300 text-black'
               >
                 {header.charAt(0).toUpperCase() + header.slice(1)}
               </TableHead>
@@ -35,17 +36,16 @@ function TableUsuarios({ data }: { data: UsuariosProps[] }) {
       <div className='max-h-[490px] overflow-y-auto'>
         <Table>
           <TableBody>
-            {data.map((item, index) => (
+            {data && data.map((item, index) => (
               <TableRow
                 key={item?.id}
                 className={index % 2 === 0 ? 'bg-accent' : ''}
               >
-                <TableCell className='table-cell'>
-                  {`${item?.name} ${item?.lastName}`}
-                </TableCell>
-                <TableCell className='table-cell'>{item?.email}</TableCell>
-                <TableCell className='table-cell'>{item?.telefono}</TableCell>
-                <TableCell className='table-cell'>
+                <TableCell>{item?.name}</TableCell>
+                <TableCell>{item?.email}</TableCell>
+                <TableCell>{item?.telefono}</TableCell>
+                <TableCell><Badge variant='outline'>{item?.role.name}</Badge></TableCell>
+                <TableCell>
                   <Button onClick={() => router.push(`/usuarios/${item?.id}`)}>
                     Editar
                   </Button>

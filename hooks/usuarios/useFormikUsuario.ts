@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { useMemo } from 'react';
-import { FormikProps, UsuariosProps } from 'types';
+import { UsuarioProps } from 'types';
 import { useMutation } from '@apollo/client';
 import { CREATE_USUARIO, UPDATE_USUARIO } from 'graphql/mutations/usuarios';
 import { nanoid } from 'nanoid';
@@ -11,7 +10,7 @@ import { GET_ALL_USERS } from 'graphql/queries/usuarios';
 import { useToast } from '@components/ui/use-toast';
 import { createUser } from 'utils/api';
 
-const useFormikUsuario = ({ ...data }: UsuariosProps) => {
+const useFormikUsuario = ({ ...data }: UsuarioProps) => {
   const router = useRouter();
   const { toast } = useToast();
   const isCompleted = {
@@ -30,16 +29,6 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
   };
   const [createUsuario] = useMutation(CREATE_USUARIO, isCompleted);
   const [updateUsuario] = useMutation(UPDATE_USUARIO, isCompleted);
-  // const initialValues = useMemo(
-  //   () => ({
-  //     name: data?.name || '',
-  //     lastName: data?.lastName || '',
-  //     email: data?.email || '',
-  //     telefono: data?.telefono || '',
-  //     rol: data?.rol || '',
-  //   }),
-  //   [data]
-  // );
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Campo requerido'),
@@ -69,7 +58,7 @@ console.log('data :>> ', data, validationSchema);
           },
           data: {
             name: { set: values?.name },
-            cedula: { set: values?.telefono },
+            telefono: { set: values?.telefono },
             email: { set: values?.email },
             role: {
               connect: {
@@ -95,7 +84,7 @@ console.log('data :>> ', data, validationSchema);
             data: {
               name: values?.name,
               email: values?.email,
-              cedula: values?.telefono,
+              telefono: values?.telefono,
               image: usuario.picture,
               deleted: false,
               enabled: true,
