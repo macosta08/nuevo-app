@@ -7,6 +7,19 @@ import { GET_USER } from 'graphql/queries/usuarios';
 import { useRouter } from 'next/router';
 import { useFormikUsuario } from 'hooks/usuarios/useFormikUsuario';
 import { GET_ROLES } from 'graphql/queries/roles';
+import safeJsonStringify from 'safe-json-stringify';
+import matchRoles from 'utils/matchRoles';
+
+export async function getServerSideProps(ctx) {
+  const { rejected, isPublic, page } = await matchRoles(ctx);
+  return {
+    props: {
+      rejected,
+      isPublic,
+      page: JSON.parse(safeJsonStringify(page)),
+    },
+  };
+}
 
 function UsuarioId() {
   const router = useRouter();
@@ -20,17 +33,18 @@ function UsuarioId() {
     fetchPolicy: 'cache-and-network',
   });
 
-  // aqui hay que pasar la data que venga del query
+  // Obtén los datos iniciales del usuario para el formulario
   const data = {
     id: usuario?.user?.id || '',
     name: usuario?.user?.name || '',
-    lastName: usuario?.user?.lastName || '',
     email: usuario?.user?.email || '',
     telefono: usuario?.user?.cedula || '',
     rol: usuario?.user?.role?.id || '',
   };
-  const { formik, handleMutation } = useFormikUsuario({ ...data });
 
+  // Obtén formik y la función de manejo de mutaciones desde el hook personalizado
+  const { formik, handleMutation } = useFormikUsuario({ ...data });
+console.log('formik.errors.name :>> ', formik.errors);
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
       <section className='mx-auto w-full max-w-4xl rounded-md bg-purple-200 p-6 shadow-md dark:bg-gray-800'>
@@ -45,31 +59,28 @@ function UsuarioId() {
             type='text'
             placeholder='Ingrese el nombre'
             name='name'
-            value={data?.name}
-            onChange={formik.handleChange }
-          />
-          <TextInput
-            name='lastName'
-            label='Apellido'
-            type='text'
-            placeholder='Ingrese el apellido'
-            value={data?.lastName}
+            value={formik?.values?.name}
             onChange={formik.handleChange}
+            error={formik.errors.name}
+            required
           />
           <TextInput
             name='email'
             label='Correo'
             type='email'
             placeholder='Ingrese el correo electronico'
-            value={data?.email}
+            value={formik?.values?.email}
             onChange={formik.handleChange}
+            disabled={router?.query?.id !== 'nuevo'}
+            error={formik.errors.email}
+            required
           />
           <TextInput
             name='telefono'
             label='Telefono'
             type='tel'
             placeholder='Ingrese el telefono'
-            value={data?.telefono}
+            value={formik?.values?.telefono}
             onChange={formik.handleChange}
           />
 
@@ -77,8 +88,9 @@ function UsuarioId() {
             <span className='font-medium'>Selecciona un rol</span>
             <div className='flex gap-4'>
               {dataRoles &&
-                dataRoles?.roles?.map((role: { id: string; name: string }) => (
+                dataRoles?.roles.map((role) => (
                   <TextInput
+                    key={role?.id}
                     name='rol'
                     label={role?.name}
                     type='radio'
@@ -87,6 +99,8 @@ function UsuarioId() {
                     onChange={() => {
                       formik.setFieldValue('rol', role?.id);
                     }}
+                    error={formik.errors.rol}
+                    required
                   />
                 ))}
             </div>

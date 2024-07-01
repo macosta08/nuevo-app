@@ -14,33 +14,6 @@ import { createUser } from 'utils/api';
 const useFormikUsuario = ({ ...data }: UsuariosProps) => {
   const router = useRouter();
   const { toast } = useToast();
-  // const initialValues = useMemo(
-  //   () => ({
-  //     name: data?.name || '',
-  //     lastName: data?.lastName || '',
-  //     email: data?.email || '',
-  //     telefono: data?.telefono || '',
-  //     rol: data?.rol || '',
-  //   }),
-  //   [data]
-  // );
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required('Campo requerido'),
-    lastName: Yup.string().required('Campo requerido'),
-    email: Yup.string().required('Campo requerido'),
-    telefono: Yup.string().required('Campo requerido'),
-    rol: Yup.string().required('Campo requerido'),
-  });
-
-  const formik: FormikProps = useFormik({
-    initialValues: data,
-    validationSchema,
-    onSubmit: () => {},
-    enableReinitialize: true,
-  });
-
-  const { values } = formik;
   const isCompleted = {
     onCompleted: () => {
       toast({
@@ -57,6 +30,36 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
   };
   const [createUsuario] = useMutation(CREATE_USUARIO, isCompleted);
   const [updateUsuario] = useMutation(UPDATE_USUARIO, isCompleted);
+  // const initialValues = useMemo(
+  //   () => ({
+  //     name: data?.name || '',
+  //     lastName: data?.lastName || '',
+  //     email: data?.email || '',
+  //     telefono: data?.telefono || '',
+  //     rol: data?.rol || '',
+  //   }),
+  //   [data]
+  // );
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Campo requerido'),
+    email: Yup.string().required('Campo requerido'),
+    rol: Yup.string().required('Campo requerido'),
+  });
+console.log('data :>> ', data, validationSchema);
+  const formik: FormikProps = useFormik({
+    initialValues: {
+            name: data?.name || '',
+      email: data?.email || '',
+      telefono: data?.telefono || '',
+      rol: data?.rol || '',
+    },
+    validationSchema,
+    onSubmit: () => {},
+    enableReinitialize: true,
+  });
+  const { values, isValid } = formik;
+
   const handleMutation = async () => {
     if (router?.query?.id !== 'nuevo') {
       await updateUsuario({
@@ -65,10 +68,14 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
             id: router?.query?.id,
           },
           data: {
-            name: values?.name,
-            lastName: values?.lastName,
-            cedula: values?.telefono,
-            rol: values?.rol,
+            name: { set: values?.name },
+            cedula: { set: values?.telefono },
+            email: { set: values?.email },
+            role: {
+              connect: {
+                id: values.rol,
+              },
+            },
           },
         },
         refetchQueries: [GET_ALL_USERS],
@@ -86,12 +93,6 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
         await createUsuario({
           variables: {
             data: {
-              // nombre: values?.nombre,
-              // name: values?.name,
-              // lastName: values?.lastName,
-              // email: values?.email,
-              // telefono: values?.telefono,
-
               name: values?.name,
               email: values?.email,
               cedula: values?.telefono,
@@ -120,6 +121,7 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
 
   return {
     formik,
+    isValid,
     handleMutation,
   };
 };
