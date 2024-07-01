@@ -24,7 +24,6 @@ export interface IngresosEgresosProps {
 export interface UsuariosProps {
   id: string | undefined;
   name: string | undefined;
-  lastName: string | undefined;
   email: string | undefined;
   telefono: string | undefined;
   rol: string | undefined;

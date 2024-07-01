@@ -47,7 +47,7 @@ const useFormikUsuario = ({ ...data }: UsuariosProps) => {
     rol: Yup.string().required('Campo requerido'),
   });
 console.log('data :>> ', data, validationSchema);
-  const formik: FormikProps = useFormik({
+  const formik = useFormik({
     initialValues: {
             name: data?.name || '',
       email: data?.email || '',

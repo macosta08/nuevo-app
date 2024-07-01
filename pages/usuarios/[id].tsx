@@ -43,7 +43,7 @@ function UsuarioId() {
   };
 
   // Obtén formik y la función de manejo de mutaciones desde el hook personalizado
-  const { formik, handleMutation } = useFormikUsuario({ ...data });
+  const { formik, handleMutation, isValid } = useFormikUsuario({ ...data });
 console.log('formik.errors.name :>> ', formik.errors);
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
@@ -61,7 +61,7 @@ console.log('formik.errors.name :>> ', formik.errors);
             name='name'
             value={formik?.values?.name}
             onChange={formik.handleChange}
-            error={formik.errors.name}
+            error={formik.errors.name as string}
             required
           />
           <TextInput
@@ -72,7 +72,7 @@ console.log('formik.errors.name :>> ', formik.errors);
             value={formik?.values?.email}
             onChange={formik.handleChange}
             disabled={router?.query?.id !== 'nuevo'}
-            error={formik.errors.email}
+            error={formik.errors.email as string}
             required
           />
           <TextInput
@@ -107,7 +107,7 @@ console.log('formik.errors.name :>> ', formik.errors);
           </div>
 
           <div className='flex justify-end'>
-            <Button onClick={() => handleMutation()}>Guardar</Button>
+            <Button onClick={() => handleMutation()} disabled={!isValid}>Guardar</Button>
           </div>
         </form>
       </section>
