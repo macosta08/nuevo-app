@@ -7,6 +7,8 @@ import { useQuery } from '@apollo/client';
 import { GET_MOVIMIENTOS } from 'graphql/queries/movimientos';
 import safeJsonStringify from 'safe-json-stringify';
 import matchRoles from 'utils/matchRoles';
+import { PrivateComponent } from '@components/RBAC/PrivateComponent';
+import { useSession } from 'next-auth/react';
 
 export async function getServerSideProps(ctx) {
   const { rejected, isPublic, page } = await matchRoles(ctx);
@@ -19,6 +21,7 @@ export async function getServerSideProps(ctx) {
   };
 }
 function IngresosEgresos() {
+  const { data: session } = useSession();
   const { data: dataMovimientos } = useQuery(GET_MOVIMIENTOS, {
     fetchPolicy: 'cache-and-network',
   });
@@ -27,9 +30,10 @@ function IngresosEgresos() {
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
       <div className='flex w-full justify-between'>
         <TextPrimary text='Ingresos y egresos' />
+        <PrivateComponent roleList={['Administrador']} userRole={session?.user?.role?.name}>
         <Button onClick={() => router.push(`/ingresos-egresos/nuevo`)}>
           Nuevo
-        </Button>
+        </Button></PrivateComponent>
       </div>
       <TableIngresosEgresos data={dataMovimientos?.movimientos} />
     </div>

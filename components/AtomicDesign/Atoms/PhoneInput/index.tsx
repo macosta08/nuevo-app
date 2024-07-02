@@ -1,14 +1,14 @@
 import React from 'react';
 import { FormikErrors } from 'formik';
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import { PatternFormat , NumericFormatProps } from 'react-number-format';
 
-interface NumberInputProps extends NumericFormatProps {
+interface PhoneInputProps extends NumericFormatProps {
   label: string;
   error?: string | string[] | FormikErrors<any> | FormikErrors<any>[];
   thousandSeparator?: boolean;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({
+const PhoneInput: React.FC<PhoneInputProps> = ({
   label,
   placeholder,
   error,
@@ -16,7 +16,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
 }) => (
   <div>
     <label className='text-gray-700  dark:text-gray-200'>{label}</label>
-    <NumericFormat
+    <PatternFormat 
+      format="+1 (###) #### ###"
+      allowEmptyFormatting mask="_" 
       {...rest}
       placeholder={placeholder}
       className='form-radio disabled:bg-slate-200 mt-2 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300'
@@ -25,4 +27,4 @@ const NumberInput: React.FC<NumberInputProps> = ({
   </div>
 );
 
-export default NumberInput;
+export default PhoneInput;

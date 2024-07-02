@@ -4,6 +4,7 @@ export type LinkItem = {
   name: string;
   link: string;
   icon: React.ReactNode;
+  arrayRol: string[]
 };
 
 export type LinkItemCard = {
@@ -11,6 +12,7 @@ export type LinkItemCard = {
   link: string;
   icon: React.ReactNode;
   description: string;
+  arrayRol: string[]
 };
 
 export interface IngresosEgresosProps {

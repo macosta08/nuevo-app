@@ -8,9 +8,12 @@ import {
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
 import { links } from 'utils/links';
+import { PrivateComponent } from '@components/RBAC/PrivateComponent';
+import { useSession } from 'next-auth/react';
 
 function Sidebar() {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <aside className='fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex'>
@@ -21,6 +24,7 @@ function Sidebar() {
         {links.map((link) => {
           const isActive = router.pathname.includes(link.link);
           return (
+            <PrivateComponent roleList={link.arrayRol} userRole={session?.user?.role?.name}>
             <Tooltip key={link.link}>
               <TooltipTrigger asChild>
                 <Link
@@ -37,6 +41,7 @@ function Sidebar() {
               </TooltipTrigger>
               <TooltipContent side='right'>{link.name}</TooltipContent>
             </Tooltip>
+            </PrivateComponent>
           );
         })}
       </nav>

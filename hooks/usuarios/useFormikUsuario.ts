@@ -18,6 +18,7 @@ const useFormikUsuario = ({ ...data }: UsuarioProps) => {
       toast({
         description: 'Referencia creado exitosamente.',
       });
+      router.push('/usuarios')
     },
     onError: () => {
       toast({

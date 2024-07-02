@@ -9,6 +9,7 @@ import { useFormikUsuario } from 'hooks/usuarios/useFormikUsuario';
 import { GET_ROLES } from 'graphql/queries/roles';
 import safeJsonStringify from 'safe-json-stringify';
 import matchRoles from 'utils/matchRoles';
+import PhoneInput from '@components/AtomicDesign/Atoms/PhoneInput';
 
 export async function getServerSideProps(ctx) {
   const { rejected, isPublic, page } = await matchRoles(ctx);
@@ -75,7 +76,7 @@ function UsuarioId() {
             error={formik.errors.email as string}
             required
           />
-          <TextInput
+          <PhoneInput 
             name='telefono'
             label='Teléfono'
             type='tel'
