@@ -15,7 +15,9 @@
     "createPage": "node ./createPage.ts",
     "generate": "npx prisma generate",
     "lint": "eslint components/** utils/** pages/** hooks/**",
-    "lint:fix": "eslint --fix components/** utils/** pages/** hooks/**"
+    "lint:fix": "eslint --fix components/** utils/** pages/** hooks/**",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check ."
   },
   "dependencies": {
     "@apollo/client": "^3.7.5",

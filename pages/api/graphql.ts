@@ -23,10 +23,6 @@ export default cors(async (req, res) => {
     return false;
   }
   const session = await getSession({ req });
-  // eslint-disable-next-line no-console
-  // if (process.env.NODE_ENV === 'production' && !session) {
-  //   return res.status(401).send({ error: 'unauthorized' });
-  // }
 
   const apolloServer = new ApolloServer({
     context: () => ({ session }),

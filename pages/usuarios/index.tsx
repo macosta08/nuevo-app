@@ -38,7 +38,4 @@ function Usuarios() {
 }
 
 export default Usuarios;
-function safeJsonStringify(page: Page): string {
-  throw new Error('Function not implemented.');
-}
 

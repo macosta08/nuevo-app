@@ -32,7 +32,4 @@ function Inicio() {
 }
 
 export default Inicio;
-function safeJsonStringify(page: any): string {
-  throw new Error('Function not implemented.');
-}
 
