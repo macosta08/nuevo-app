@@ -12,7 +12,19 @@ import { GET_MOVIMIENTO } from 'graphql/queries/movimientos';
 import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/react';
 import { isoStringToDate } from 'utils/functions/currencyString';
+import safeJsonStringify from 'safe-json-stringify';
+import matchRoles from 'utils/matchRoles';
 
+export async function getServerSideProps(ctx) {
+  const { rejected, isPublic, page } = await matchRoles(ctx);
+  return {
+    props: {
+      rejected,
+      isPublic,
+      page: JSON.parse(safeJsonStringify(page)),
+    },
+  };
+}
 function IngresosEgresosId() {
   const router = useRouter();
   const { data: session }: any = useSession();

@@ -4,6 +4,19 @@ import TextPrimary from '@components/AtomicDesign/Atoms/TextPrimary';
 import CardTotal from '@components/AtomicDesign/Molecules/CardTotal';
 import { Grafica } from '@components/AtomicDesign/Molecules/Grafica';
 import { GET_ALL_MOVIMIENTOS, GET_EGRESOS, GET_INGRESOS } from 'graphql/queries/movimientos';
+import safeJsonStringify from 'safe-json-stringify';
+import matchRoles from 'utils/matchRoles';
+
+export async function getServerSideProps(ctx) {
+  const { rejected, isPublic, page } = await matchRoles(ctx);
+  return {
+    props: {
+      rejected,
+      isPublic,
+      page: JSON.parse(safeJsonStringify(page)),
+    },
+  };
+}
 
 function Graficas() {
   const { data: dataMovimientos } = useQuery(GET_ALL_MOVIMIENTOS, {
