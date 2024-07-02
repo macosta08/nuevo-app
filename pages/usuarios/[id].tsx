@@ -44,7 +44,7 @@ function UsuarioId() {
 
   // Obtén formik y la función de manejo de mutaciones desde el hook personalizado
   const { formik, handleMutation, isValid } = useFormikUsuario({ ...data });
-console.log('formik.errors.name :>> ', formik.errors);
+
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
       <section className='mx-auto w-full max-w-4xl rounded-md bg-purple-200 p-6 shadow-md dark:bg-gray-800'>

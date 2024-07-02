@@ -39,7 +39,7 @@ function IngresosEgresosId() {
       name: enumConcepto[index],
     })
   );
-  console.log('formik', formik)
+
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
       <TextSecundary

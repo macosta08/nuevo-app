@@ -4,7 +4,6 @@ import { linksCards } from 'utils/links';
 
 function Inicio() {
   // const { data: session } = useSession();
-  // console.log(session)
   return (
     <div className='flex h-screen flex-col items-center gap-32 p-4'>
       <TextPrimary text='Bienvenido, nombre usuario' />

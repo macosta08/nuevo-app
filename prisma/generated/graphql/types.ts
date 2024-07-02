@@ -1,6 +1,4 @@
 import { gql } from 'apollo-server-micro';
-import { HST_examenesRealizadosTypes } from './hst_examenesrealizados/types';
-import { TMP_examenesRealizadosTypes } from './tmp_examenesrealizados/types';
 import { AccountTypes } from './account/types';
 import { PageTypes } from './page/types';
 import { RoleTypes } from './role/types';
@@ -37,8 +35,6 @@ const genericTypes = gql`
 
 export const types = [
   genericTypes,
-  HST_examenesRealizadosTypes,
-  TMP_examenesRealizadosTypes,
   AccountTypes,
   PageTypes,
   RoleTypes,
