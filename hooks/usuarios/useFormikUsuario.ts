@@ -7,25 +7,18 @@ import { CREATE_USUARIO, UPDATE_USUARIO } from 'graphql/mutations/usuarios';
 import { nanoid } from 'nanoid';
 
 import { GET_ALL_USERS } from 'graphql/queries/usuarios';
-import { useToast } from '@components/ui/use-toast';
 import { createUser } from 'utils/api';
+import { toast } from 'react-toastify';
 
 const useFormikUsuario = ({ ...data }: UsuarioProps) => {
   const router = useRouter();
-  const { toast } = useToast();
   const isCompleted = {
     onCompleted: () => {
-      toast({
-        description: 'Referencia creado exitosamente.',
-      });
+      toast.success('Referencia creado exitosamente.');
       router.push('/usuarios')
     },
     onError: () => {
-      toast({
-        variant: 'destructive',
-        description:
-          'No se ha podido crear el referencia, comuníquese con soporte.',
-      });
+      toast.error('No se ha podido crear el referencia, comuníquese con soporte.');
     },
   };
   const [createUsuario] = useMutation(CREATE_USUARIO, isCompleted);

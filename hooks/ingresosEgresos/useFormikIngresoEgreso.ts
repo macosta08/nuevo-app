@@ -7,9 +7,9 @@ import {
   CREATE_MOVIMIENTO,
   UPDATE_MOVIMIENTO,
 } from 'graphql/mutations/movimientos';
-import { toast } from '@components/ui/use-toast';
 import { GET_MOVIMIENTOS } from 'graphql/queries/movimientos';
 import { currencyStringToFloat } from 'utils/functions/currencyString';
+import { toast } from 'react-toastify';
 
 const useFormikIngresoEgreso = ({ ...data }: IngresosEgresosProps) => {
   const router = useRouter();
@@ -31,17 +31,11 @@ const useFormikIngresoEgreso = ({ ...data }: IngresosEgresosProps) => {
 
   const isCompleted = {
     onCompleted: () => {
-      toast({
-        description: 'Referencia creado exitosamente.',
-      });
+      toast.success('Referencia creado exitosamente.');
       router.push('/ingresos-egresos');
     },
     onError: () => {
-      toast({
-        variant: 'destructive',
-        description:
-          'No se ha podido crear el referencia, comuníquese con soporte.',
-      });
+      toast.error('No se ha podido crear el referencia, comuníquese con soporte.');
     },
   };
   const [createMovimiento] = useMutation(CREATE_MOVIMIENTO, isCompleted);

@@ -8,7 +8,6 @@ import Loading from '@components/Loading';
 import 'nprogress/nprogress.css';
 import 'styles/globals.scss';
 import { NextComponentType, NextPageContext } from 'next';
-import { ToastContainer } from 'react-toastify';
 import PrivateRoute from '@components/PrivateRoute';
 import { TooltipProvider } from '@components/ui/tooltip';
 
@@ -20,8 +19,8 @@ function MyApp({ Component, pageProps: { session, page, ...pageProps } }: any) {
   return (
     <SessionProvider session={session}>
       <Head>
-        <title>{`Instituto Gastroclínico | ${page?.name}`}</title>
-        <link rel='shortcut icon' href='/public/img/logos/logoCirculo.svg' />
+        <title>{`Gestión de ingresos y egresos | ${page?.name}`}</title>
+        <link rel='shortcut icon' href='/public/img/logo.png' />
         <meta name='title' content='' />
         <meta name='description' content='' />
 
@@ -60,8 +59,6 @@ function App({
         >
           <Component {...pageProps} />
         </PrivateRoute>
-
-        <ToastContainer />
       </TooltipProvider>
     </ApolloProvider>
   );

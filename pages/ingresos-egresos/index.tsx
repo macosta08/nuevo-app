@@ -21,7 +21,7 @@ export async function getServerSideProps(ctx) {
   };
 }
 function IngresosEgresos() {
-  const { data: session } = useSession();
+  const { data: session }: any = useSession();
   const { data: dataMovimientos } = useQuery(GET_MOVIMIENTOS, {
     fetchPolicy: 'cache-and-network',
   });

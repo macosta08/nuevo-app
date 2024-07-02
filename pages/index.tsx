@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
 }
 
 function Inicio() {
-  const { data: session } = useSession();
+  const { data: session }: any = useSession();
   return (
     <div className='flex h-screen flex-col items-center gap-32 p-4'>
       <TextPrimary text='Bienvenido, nombre usuario' />
