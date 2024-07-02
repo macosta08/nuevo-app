@@ -29,9 +29,9 @@ function IngresosEgresosId() {
   const router = useRouter();
   const { data: session }: any = useSession();
   const { data: dataMovimiento } = useQuery(GET_MOVIMIENTO, {
-   variables: {
-    movimientoId: router.query.id as string
-   },
+    variables: {
+      movimientoId: router.query.id as string,
+    },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -43,14 +43,14 @@ function IngresosEgresosId() {
     descripcion: dataMovimiento?.movimiento?.descripcion || '',
     userId: dataMovimiento?.movimiento?.userId || session?.user?.id,
   };
-  const { formik, isValid, handleMutation } = useFormikIngresoEgreso({ ...data });
+  const { formik, isValid, handleMutation } = useFormikIngresoEgreso({
+    ...data,
+  });
 
-  const optionConcepto = Object?.keys(enumConcepto)?.map(
-    (index) => ({
-      id: enumConcepto[index],
-      name: enumConcepto[index],
-    })
-  );
+  const optionConcepto = Object?.keys(enumConcepto)?.map((index) => ({
+    id: enumConcepto[index],
+    name: enumConcepto[index],
+  }));
 
   return (
     <div className='flex h-screen flex-col items-center gap-8 p-4'>
@@ -63,14 +63,14 @@ function IngresosEgresosId() {
       />
       <section className='mx-auto w-full max-w-4xl rounded-md bg-purple-200 p-6 shadow-md dark:bg-gray-800'>
         <form onSubmit={formik.handleSubmit} className='mt-4 space-y-6'>
-          <NumberInput 
-            label='Monto' 
-            name='monto' 
+          <NumberInput
+            label='Monto'
+            name='monto'
             prefix={'$'}
-            value={formik?.values?.monto} 
-            onChange={formik.handleChange} 
+            value={formik?.values?.monto}
+            onChange={formik.handleChange}
             thousandSeparator
-          /> 
+          />
           <TextInput
             label='Fecha'
             type='date'
@@ -80,25 +80,25 @@ function IngresosEgresosId() {
             onChange={formik.handleChange}
           />
 
-      <div className='flex w-full  flex-col gap-3 rounded-md  p-2'>
+          <div className='flex w-full  flex-col gap-3 rounded-md  p-2'>
             <span className='text-gray-700 dark:text-gray-200'>Concepto</span>
             <div className='flex gap-4'>
               {optionConcepto &&
                 optionConcepto?.map((concepto) => (
-                <RadioInput
-                  key={concepto?.id}
-                  label={concepto?.name}
-                  type='radio'
-                  name='concepto'
-                  extraclass={concepto?.name === 'Ingreso'}
-                  value={formik?.values?.concepto}
-                  checked={formik?.values?.concepto === concepto?.id}
-                  onChange={() => {
-                    formik.setFieldValue('concepto', concepto?.id);
-                  }}
-                  error={formik.errors.concepto}
-                  required
-                />
+                  <RadioInput
+                    key={concepto?.id}
+                    label={concepto?.name}
+                    type='radio'
+                    name='concepto'
+                    extraclass={concepto?.name === 'Ingreso'}
+                    value={formik?.values?.concepto}
+                    checked={formik?.values?.concepto === concepto?.id}
+                    onChange={() => {
+                      formik.setFieldValue('concepto', concepto?.id);
+                    }}
+                    error={formik.errors.concepto}
+                    required
+                  />
                 ))}
             </div>
           </div>
@@ -110,7 +110,9 @@ function IngresosEgresosId() {
             onChange={formik.handleChange}
           />
           <div className='flex justify-end'>
-            <Button onClick={() => handleMutation()} disabled={!isValid}>Guardar</Button>
+            <Button onClick={() => handleMutation()} disabled={!isValid}>
+              Guardar
+            </Button>
           </div>
         </form>
       </section>

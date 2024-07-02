@@ -18,22 +18,22 @@ const MovimientoResolvers = {
     totalConceptoEgreso: async () => {
       const result = await prisma.movimiento.aggregate({
         where: {
-          concepto: 'Egreso'
+          concepto: 'Egreso',
         },
         _sum: {
-          monto: true
-        }
+          monto: true,
+        },
       });
       return result._sum.monto || 0; // Devuelve 0 si no hay resultados
     },
     totalConceptoIngreso: async () => {
       const result = await prisma.movimiento.aggregate({
         where: {
-          concepto: 'Ingreso'
+          concepto: 'Ingreso',
         },
         _sum: {
-          monto: true
-        }
+          monto: true,
+        },
       });
       return result._sum.monto || 0; // Devuelve 0 si no hay resultados
     },
@@ -51,7 +51,7 @@ const MovimientoResolvers = {
   Mutation: {
     createMovimiento: async (_: any, args: any) => {
       return await prisma.movimiento.create({
-        data: { ...args.data},
+        data: { ...args.data },
       });
     },
     updateMovimiento: async (_: any, args: any) => {

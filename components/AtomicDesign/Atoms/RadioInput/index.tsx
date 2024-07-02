@@ -15,16 +15,16 @@ const RadioInput: React.FC<RadioInputProps> = ({
   extraclass,
   ...rest
 }) => (
-  <div className={`w-full border bg-white p-4 rounded-md ${extraclass ? 'border-green-600' : 'border-red-600'}`}>
+  <div
+    className={`w-full border bg-white p-4 rounded-md ${extraclass ? 'border-green-600' : 'border-red-600'}`}
+  >
     <label className='flex items-center cursor-pointer'>
-      <input
-        type={type}
-        className='hidden'
-        {...rest}
-      />
+      <input type={type} className='hidden' {...rest} />
       <div className='flex items-center justify-center w-6 h-6 border-2 border-gray-400 rounded-md'>
         {/* Circle for checked state */}
-        <div className={`w-4 h-4 rounded-full ${extraclass ? 'bg-green-600' : 'bg-red-600'} ${rest.checked ? 'block' : 'hidden'}`}></div>
+        <div
+          className={`w-4 h-4 rounded-full ${extraclass ? 'bg-green-600' : 'bg-red-600'} ${rest.checked ? 'block' : 'hidden'}`}
+        ></div>
       </div>
       <span className='ml-2 text-gray-700 dark:text-gray-200'>{label}</span>
     </label>

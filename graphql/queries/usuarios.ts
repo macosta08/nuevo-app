@@ -16,18 +16,18 @@ const GET_USER = gql`
 `;
 
 const GET_ALL_USERS = gql`
-query Users {
-  users {
-    id
-    name
-    telefono
-    email
-    role {
+  query Users {
+    users {
       id
       name
+      telefono
+      email
+      role {
+        id
+        name
+      }
     }
   }
-}
 `;
 
 export { GET_ALL_USERS, GET_USER };

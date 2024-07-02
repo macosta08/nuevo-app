@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import TextPrimary from '@components/AtomicDesign/Atoms/TextPrimary';
 import { Button } from '@components/ui/button';
 import TableUsuarios from '@components/AtomicDesign/Molecules/TableUsuarios';
@@ -38,4 +38,3 @@ function Usuarios() {
 }
 
 export default Usuarios;
-

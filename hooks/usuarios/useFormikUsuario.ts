@@ -37,7 +37,7 @@ const useFormikUsuario = ({ ...data }: UsuarioProps) => {
   });
   const formik = useFormik({
     initialValues: {
-            name: data?.name || '',
+      name: data?.name || '',
       email: data?.email || '',
       telefono: data?.telefono || '',
       rol: data?.rol || '',

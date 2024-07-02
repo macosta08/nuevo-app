@@ -23,10 +23,7 @@ function TableUsuarios({ data }: { data: UsuariosProps[] }) {
         <TableHeader>
           <TableRow>
             {headers.map((header) => (
-              <TableHead
-                key={header}
-                className='bg-purple-300 text-black'
-              >
+              <TableHead key={header} className='bg-purple-300 text-black'>
                 {header.charAt(0).toUpperCase() + header.slice(1)}
               </TableHead>
             ))}
@@ -36,22 +33,27 @@ function TableUsuarios({ data }: { data: UsuariosProps[] }) {
       <div className='max-h-[490px] overflow-y-auto'>
         <Table>
           <TableBody>
-            {data && data.map((item, index) => (
-              <TableRow
-                key={item?.id}
-                className={index % 2 === 0 ? 'bg-accent' : ''}
-              >
-                <TableCell>{item?.name}</TableCell>
-                <TableCell>{item?.email}</TableCell>
-                <TableCell>{item?.telefono}</TableCell>
-                <TableCell><Badge variant='outline'>{item?.role.name}</Badge></TableCell>
-                <TableCell>
-                  <Button onClick={() => router.push(`/usuarios/${item?.id}`)}>
-                    Editar
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {data &&
+              data.map((item, index) => (
+                <TableRow
+                  key={item?.id}
+                  className={index % 2 === 0 ? 'bg-accent' : ''}
+                >
+                  <TableCell>{item?.name}</TableCell>
+                  <TableCell>{item?.email}</TableCell>
+                  <TableCell>{item?.telefono}</TableCell>
+                  <TableCell>
+                    <Badge variant='outline'>{item?.role.name}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      onClick={() => router.push(`/usuarios/${item?.id}`)}
+                    >
+                      Editar
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </div>

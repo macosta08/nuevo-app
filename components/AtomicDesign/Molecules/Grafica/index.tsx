@@ -27,7 +27,7 @@ const Grafica = ({
       <div className='self-stretch text-blue-950 text-xl font-bold  leading-normal'>
         {titulo}
       </div>
-      
+
       <div className=' w-full justify-center items-center flex'>
         <PieChart
           id='pie'

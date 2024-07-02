@@ -56,9 +56,6 @@ export interface UsuariosProps {
   role: RoleProps;
 }
 
-
-
-
 export interface FormikProps {
   values: FormikValues;
   initialValues: FormikValues;

@@ -12,7 +12,6 @@ const TextArea: React.FC<TextAreaProps> = ({
   error,
   ...rest
 }) => {
-
   return (
     <div className='w-full'>
       <label className='text-gray-700 dark:text-gray-200'>{label}</label>
@@ -23,7 +22,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         {...rest}
       />
       {typeof error === 'string' ? (
-        <div className="error text-red-500 mt-2">{error}</div>
+        <div className='error text-red-500 mt-2'>{error}</div>
       ) : null}
     </div>
   );
