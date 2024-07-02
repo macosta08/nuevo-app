@@ -48,7 +48,7 @@ function Graficas() {
       <TextPrimary text='Sistemas de gestión de ingresos y gastos' />
       <div className='w-full flex gap-4 justify-center'>
         <div>
-          {dataIngreso && egresos && (
+          {dataIngreso && dataEgresos && (
             <div className='flex w-full justify-between gap-10'>
               <Grafica
                 titulo='Ingresos y egresos'
@@ -63,10 +63,10 @@ function Graficas() {
           {dataMovimientos && (
             <DownloadCSVButton data={dataMovimientos?.movimientos} />
           )}
-          <CardTotal
+        {dataIngreso && dataEgresos &&  <CardTotal
             totalEgreso={egresos?.monto}
             totalIngreso={ingresos?.monto}
-          />
+          />}
         </div>
       </div>
     </div>
