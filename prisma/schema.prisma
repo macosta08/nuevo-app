@@ -10,25 +10,6 @@ generator client {
   previewFeatures = ["filterJson", "fullTextSearch"]
 }
 
-model HST_examenesRealizados {
-  id           String   @id @default(cuid())
-  typeDocument String
-  nameProcess  String
-  idExamen     String?
-  pathS3       String?
-  createdAt    DateTime
-  updatedAt    DateTime
-}
-
-model TMP_examenesRealizados {
-  id           String   @id @default(cuid())
-  typeDocument String
-  nameProcess  String
-  idExamen     String?
-  createdAt    DateTime
-  updatedAt    DateTime
-}
-
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -53,8 +34,8 @@ model Page {
   id           String   @id @default(cuid())
   name         String   @unique
   route        String   @unique
-  isPublic     Boolean  @default(false)
   imageLink    String?
+  isPublic     Boolean  @default(false)
   customizable Boolean  @default(false)
   roles        Role[]
   createdAt    DateTime @default(now())
@@ -63,9 +44,9 @@ model Page {
 
 model Role {
   id        String        @id @default(cuid())
+  icon      String?
   name      Enum_RoleName @unique
   pages     Page[]
-  icon      String?
   users     User[]
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
@@ -81,20 +62,20 @@ model Session {
 
 model User {
   id            String       @id @default(cuid())
-  deleted       Boolean      @default(false)
-  enabled       Boolean      @default(true)
-  email         String?      @unique
-  emailVerified DateTime?
   image         String?
   name          String?
   telefono      String?
+  email         String?      @unique
+  deleted       Boolean      @default(false)
+  enabled       Boolean      @default(true)
+  emailVerified DateTime?
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
   movimientos   Movimiento[]
   role          Role?        @relation(fields: [roleId], references: [id])
   roleId        String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Movimiento {
@@ -126,8 +107,6 @@ model VerificationRequest {
 }
 
 enum Enum_RoleName {
-  Superadmin
-  Admin
-  Medico
-  Paciente
+  Usuario
+  Administrador
 }

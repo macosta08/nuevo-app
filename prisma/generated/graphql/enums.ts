@@ -10,10 +10,8 @@ const GQLEnums = gql`
   }
 
   enum Enum_RoleName {
-    Superadmin
-    Admin
-    Medico
-    Paciente
+    Usuario
+    Administrador
   }
   input Enum_RoleNameInput {
     set: Enum_RoleName
