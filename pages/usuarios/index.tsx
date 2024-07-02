@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import TextPrimary from '@components/AtomicDesign/Atoms/TextPrimary';
 import { Button } from '@components/ui/button';
-import { UsuariosProps } from 'types';
-import PaginationComponent from '@components/AtomicDesign/Molecules/PaginationComponent';
 import TableUsuarios from '@components/AtomicDesign/Molecules/TableUsuarios';
 import router from 'next/router';
 import { useQuery } from '@apollo/client';
@@ -12,7 +10,6 @@ function Usuarios() {
   const { data: dataUser } = useQuery(GET_ALL_USERS, {
     fetchPolicy: 'cache-and-network',
   });
- console.log('dataUser :>> ', dataUser);
   return (
     <div className='flex flex-col p-4 px-10 gap-8 items-center h-screen'>
       <div className='w-full justify-between flex'>
@@ -22,7 +19,6 @@ function Usuarios() {
         </Button>
       </div>
       <TableUsuarios data={dataUser?.users} />
-         <PaginationComponent />
     </div>
   );
 }

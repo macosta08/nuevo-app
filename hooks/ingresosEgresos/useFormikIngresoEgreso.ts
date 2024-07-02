@@ -1,19 +1,15 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMemo } from 'react';
-import { FormikProps, IngresosEgresosProps } from 'types';
-// import { useRouter } from 'next/router';
+import {  IngresosEgresosProps } from 'types';
+import { useRouter } from 'next/router';
+import { useMutation } from '@apollo/client';
+import { CREATE_MOVIMIENTO, UPDATE_MOVIMIENTO } from 'graphql/mutations/movimientos';
+import { toast } from '@components/ui/use-toast';
+import { GET_MOVIMIENTOS } from 'graphql/queries/movimientos';
+import { currencyStringToFloat } from 'utils/functions/currencyString';
 
-const useFormikIngresoEgreso = ({ data }: { data: IngresosEgresosProps }) => {
-  // const router = useRouter();
-  const initialValues = useMemo(
-    () => ({
-      monto: data?.monto || '',
-      concepto: data?.concepto || '',
-      fecha: data?.fecha || '',
-    }),
-    [data]
-  );
+const useFormikIngresoEgreso = ({ ...data }: IngresosEgresosProps) => {
+  const router = useRouter();
 
   const validationSchema = Yup.object({
     monto: Yup.string().required('Campo requerido'),
@@ -21,75 +17,79 @@ const useFormikIngresoEgreso = ({ data }: { data: IngresosEgresosProps }) => {
     fecha: Yup.string().required('Campo requerido'),
   });
 
-  const formik: FormikProps = useFormik({
-    initialValues,
+  const formik = useFormik({
+    initialValues: data,
     validationSchema,
     onSubmit: () => {},
     enableReinitialize: true,
   });
 
-  // const { values } = formik;
-  //   const [createUsuarioMutation] = useMutation(CREATE_USUARIO, {
-  //     onCompleted: () => {
-  //       toast.success('Referencia creado exitosamente');
-  //     },
-  //     onError: () => {
-  //       toast.error(
-  //         'No se ha podido crear el referencia, comuníquese con soporte.'
-  //       );
-  //     },
-  //   });
-  //   const [updateUsuarioMutation] = useMutation(UPDATE_USUARIO, {
-  //     onCompleted: () => {
-  //       toast.success('Referencia creado exitosamente');
-  //     },
-  //     onError: () => {
-  //       toast.error(
-  //         'No se ha podido crear el referencia, comuníquese con soporte.'
-  //       );
-  //     },
-  //   });
+  const { values, isValid } = formik;
+
+  const isCompleted = {
+    onCompleted: () => {
+      toast({
+        description: 'Referencia creado exitosamente.',
+      });
+      router.push('/ingresos-egresos');
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        description:
+          'No se ha podido crear el referencia, comuníquese con soporte.',
+      });
+    },
+  };
+    const [createMovimiento] = useMutation(CREATE_MOVIMIENTO, isCompleted);
+    const [updateMovimiento] = useMutation(UPDATE_MOVIMIENTO, isCompleted);
 
   const handleMutation = async () => {
-    // if(router?.query?.id){
-    //     await updateUsuarioMutation({
-    //         variables: {
-    //           where: {
-    //             id: router?.query?.id,
-    //           },
-    //           data: {
-    //             nombre: values?.nombre,
-    //             name: values?.name,
-    // lastName: values?.lastName,
-    // email: values?.email,
-    // telefono: values?.telefono,
-    // rol: values?.rol,
-    //           },
-    //         },
-    //         refetchQueries: [GET_ALL_USERS],
-    //       });
-    // }else {
-    //     await createUsuarioMutation({
-    //         variables: {
-    //           where: {
-    //             id: '',
-    //           },
-    //           data: {
-    //             nombre: values?.nombre,
-    //             name: values?.name,
-    // lastName: values?.lastName,
-    // email: values?.email,
-    // telefono: values?.telefono,
-    // rol: values?.rol,
-    //           },
-    //         },
-    //         refetchQueries: [GET_ALL_USERS],
-    //       });
-    // }
+    if(router?.query?.id !== 'nuevo'){
+        await updateMovimiento({
+            variables: {
+              where: {
+                "id": router?.query?.id,
+              },
+              data: {
+                "concepto": {
+                  set:  values?.concepto
+                },
+                "descripcion":  {
+                  set:  values?.descripcion,
+                }, 
+                "fecha":  {
+                  set: new Date(values?.fecha).toISOString(),
+                },
+                "monto":  {
+                  set: currencyStringToFloat(values?.monto),
+                },
+                "userId":  {
+                  set: values?.userId
+                },
+              },
+            },
+            refetchQueries: [GET_MOVIMIENTOS],
+          });
+    }else {
+        await createMovimiento({
+            variables: {
+              data: {
+                "concepto": values?.concepto,
+                "descripcion": values?.descripcion,
+                "fecha":  new Date(values?.fecha).toISOString(),
+                "monto": currencyStringToFloat(values?.monto),
+                "userId": values?.userId
+              },
+            },
+            refetchQueries: [GET_MOVIMIENTOS],
+          });
+    }
   };
 
   return {
     formik,
+    isValid,
     handleMutation,
   };
 };

@@ -1,43 +1,51 @@
+import { useQuery } from '@apollo/client';
+import DownloadCSVButton from '@components/AtomicDesign/Atoms/DownloadCSVButton';
 import TextPrimary from '@components/AtomicDesign/Atoms/TextPrimary';
+import CardTotal from '@components/AtomicDesign/Molecules/CardTotal';
 import { Grafica } from '@components/AtomicDesign/Molecules/Grafica';
+import { GET_ALL_MOVIMIENTOS, GET_EGRESOS, GET_INGRESOS } from 'graphql/queries/movimientos';
 
 function Graficas() {
-  const dataUsuarios = [
-    {
-      motivo: 'Administrador',
-      cantidad: 400,
-    },
-    {
-      motivo: 'Usuario',
-      cantidad: 1000,
-    },
-  ];
-  const dataIngresosEgresos = [
-    {
-      motivo: 'Ingresos',
-      cantidad: 100000,
-    },
-    {
-      motivo: 'Egresos',
-      cantidad: 500000,
-    },
-  ];
+  const { data: dataMovimientos } = useQuery(GET_ALL_MOVIMIENTOS, {
+    fetchPolicy: 'cache-and-network',
+  });
+  const { data: dataIngreso } = useQuery(GET_INGRESOS, {
+    fetchPolicy: 'cache-and-network',
+  });
+  const { data: dataEgresos } = useQuery(GET_EGRESOS, {
+    fetchPolicy: 'cache-and-network',
+  });
+
+  const ingresos = {
+    monto: dataIngreso?.totalConceptoIngreso,
+    concepto: 'Ingreso'
+  }
+
+  const egresos = {
+    monto: dataEgresos?.totalConceptoEgreso,
+    concepto: 'Egreso'
+  }
+
   return (
     <div className='flex flex-col items-center gap-10 p-4'>
-      <TextPrimary text='Graficas' />
-      <div className='flex w-full justify-between gap-10'>
-        <Grafica
-          titulo='Usuarios'
-          data={dataUsuarios}
-          argument='motivo'
-          value='cantidad'
-        />
-        <Grafica
-          titulo='Ingresos y egresos'
-          data={dataIngresosEgresos}
-          argument='motivo'
-          value='cantidad'
-        />
+      <TextPrimary text='Sistemas de gestión de ingresos y gastos' />
+      <div className='w-full flex gap-4 justify-center'>
+        <div>
+        {dataIngreso && egresos &&  
+          <div className='flex w-full justify-between gap-10'>
+            <Grafica
+              titulo='Ingresos y egresos'
+              data={[ingresos, egresos]}
+              argument='concepto'
+              value='monto'
+            />
+          </div>
+        }
+        </div>
+        <div>
+        {dataMovimientos && <DownloadCSVButton data={dataMovimientos?.movimientos}/>}
+          <CardTotal totalEgreso={egresos?.monto} totalIngreso={ingresos?.monto} />
+        </div>
       </div>
     </div>
   );

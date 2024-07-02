@@ -15,10 +15,25 @@ export type LinkItemCard = {
 
 export interface IngresosEgresosProps {
   id?: string | undefined;
-  usuario?: string | undefined;
   concepto: string | undefined;
   fecha: string | undefined;
   monto: string | undefined;
+  descripcion: string | undefined;
+  userId: string | undefined;
+}
+
+interface UserProps {
+  id: string | undefined;
+  name: string | undefined;
+}
+
+export interface IngresosEgresosTotalProps {
+  id?: string | undefined;
+  concepto: string | undefined;
+  fecha: string | undefined;
+  monto: number | undefined;
+  descripcion: string | undefined;
+  user: UserProps;
 }
 
 export interface UsuarioProps {

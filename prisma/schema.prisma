@@ -99,7 +99,7 @@ model User {
 
 model Movimiento {
   id          String        @id @default(cuid())
-  monto       String
+  monto       Float
   fecha       DateTime
   descripcion String?
   concepto    Enum_Concepto

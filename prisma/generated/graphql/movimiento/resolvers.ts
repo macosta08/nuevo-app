@@ -15,6 +15,28 @@ const MovimientoResolvers = {
     },
   },
   Query: {
+    totalConceptoEgreso: async () => {
+      const result = await prisma.movimiento.aggregate({
+        where: {
+          concepto: 'Egreso'
+        },
+        _sum: {
+          monto: true
+        }
+      });
+      return result._sum.monto || 0; // Devuelve 0 si no hay resultados
+    },
+    totalConceptoIngreso: async () => {
+      const result = await prisma.movimiento.aggregate({
+        where: {
+          concepto: 'Ingreso'
+        },
+        _sum: {
+          monto: true
+        }
+      });
+      return result._sum.monto || 0; // Devuelve 0 si no hay resultados
+    },
     movimientos: async () => {
       return await prisma.movimiento.findMany({});
     },
@@ -29,7 +51,7 @@ const MovimientoResolvers = {
   Mutation: {
     createMovimiento: async (_: any, args: any) => {
       return await prisma.movimiento.create({
-        data: { ...args.data, fecha: new Date(args.data.fecha).toISOString() },
+        data: { ...args.data},
       });
     },
     updateMovimiento: async (_: any, args: any) => {
@@ -39,9 +61,6 @@ const MovimientoResolvers = {
         },
         data: {
           ...args.data,
-          ...(args.data.fecha && {
-            fecha: new Date(args.data.fecha).toISOString(),
-          }),
         },
       });
     },
