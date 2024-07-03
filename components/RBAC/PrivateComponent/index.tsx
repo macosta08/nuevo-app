@@ -16,7 +16,7 @@ const PrivateComponent = ({
     return null; // Opcionalmente, puedes devolver un mensaje o un componente alternativo en lugar de null.
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export { PrivateComponent };

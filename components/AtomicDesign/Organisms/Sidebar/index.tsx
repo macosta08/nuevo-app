@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Home, LineChart, Package2, Users2 } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
 import { links } from 'utils/links';
-import { PrivateComponent } from '@components/RBAC/PrivateComponent';
 import { useSession } from 'next-auth/react';
+import { PrivateComponent } from '@components/RBAC/PrivateComponent';
 
 function Sidebar() {
   const router = useRouter();
